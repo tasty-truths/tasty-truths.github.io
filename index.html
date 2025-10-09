@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasty Treats</title>
+    <meta name="description" content="A short description of the website for SEO.">
+    <meta name="author" content="The Quackers">
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Skip link for accessibility -->
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="header">
+    <div class="container header__inner">
+      <a class="brand" href="/">TastyTreats</a>
+
+      <!-- Mobile menu: details/summary is accessible and keyboard-friendly -->
+      <details class="nav" role="navigation">
+        <summary class="nav__toggle" aria-label="Toggle navigation">Menu</summary>
+        <nav aria-label="Primary">
+          <ul class="nav__list">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Recipes</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">About</a></li>
+            <li><a class="button button--primary" href="#">Contact</a></li>
+          </ul>
+        </nav>
+      </details>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero (attention grabbing block)-->
+    <section class="section hero">
+      <div class="container">
+        <h1>Welcome to Tasty Treats</h1>
+        <p class="lead">Get food, cook food, eat food.</p>
+        <p>
+          <a class="button button--primary" href="#">Get Started</a>
+          <a class="button" href="#">Learn More</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- Feature grid -->
+    <section class="section">
+      <div class="container">
+        <h2>Features</h2>
+        <div class="grid">
+          <article class="card">
+            <h3>Fast</h3>
+            <p>Lightweight layout with minimal CSS for quick loads.</p>
+          </article>
+          <article class="card">
+            <h3>Responsive</h3>
+            <p>Mobile-first (we pull up recipes on our phones mostly, right?) grid that scales cleanly up to desktop.</p>
+          </article>
+          <article class="card">
+            <h3>Accessible</h3>
+            <p>Skip links, semantic structure, and readable defaults.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content + aside -->
+    <section class="section">
+      <div class="container grid grid--sidebar">
+        <article>
+          <h2>Primary Content</h2>
+          <p>Use this area for your main articles, posts, or product info.</p>
+          <figure>
+            <img src="https://via.placeholder.com/1200x600" alt="Placeholder example" />
+            <figcaption>A responsive image example.</figcaption>
+          </figure>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, reiciendis.</p>
+        </article>
+
+        <aside class="sidebar" aria-label="Sidebar">
+          <h2>Sidebar</h2>
+          <ul class="list">
+            <li><a href="#">Popular Post</a></li>
+            <li><a href="#">Latest Update</a></li>
+            <li><a href="#">Newsletter</a></li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© <span id="year">2025</span> Name. All rights reserved.</p>
+      <nav aria-label="Footer">
+        <ul class="inline-list">
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+          <li><a href="#">Sitemap</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
