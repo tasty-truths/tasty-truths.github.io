@@ -1,12 +1,5 @@
 # Tasty Truths
 
-```
-cd existing_repo
-git remote add origin https://gitlab.cci.drexel.edu/the_quackers/recipe_sharer.git
-git branch -M main
-git push -uf origin main
-```
-
 A recipe-sharing community built by students, for students — where good food meets real people.
 
 What is Tasty Truths?
