@@ -18,12 +18,12 @@ body {
 /* ---------- Theme variables ---------- */
 :root {
   --bg: #ffffff;
-  --text: #1f2937;         /* slate-800 */
-  --muted-text: #4b5563;   /* gray-600 */
-  --border: #e5e7eb;       /* gray-200 */
-  --brand: #0ea5e9;        /* sky-500 */
+  --text: #1f2937;
+  --muted-text: #4b5563;
+  --border: #e5e7eb;
+  --brand: #0ea5e9;
   --brand-contrast: #ffffff;
-  --surface: #f8fafc;      /* slate-50 */
+  --surface: #f8fafc;
   --shadow: 0 1px 2px rgba(0,0,0,.05), 0 4px 12px rgba(0,0,0,.06);
   --radius: 14px;
   --container: 1100px;
@@ -100,7 +100,6 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 /* details/summary nav for mobile-first */
-.nav { /* <details> */ }
 .nav[open] .nav__toggle { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
 
 .nav__toggle {
@@ -141,6 +140,21 @@ img { max-width: 100%; height: auto; display: block; }
   .nav__list {
     display: flex; align-items: center; gap: .25rem;
     padding: 0; 
+  }
+
+  .desktop_header {
+    justify-content: start;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .desktop_nav {
+    display: flex;
+    flex-direction: row;
+    margin-top: auto;
+    justify-content: space-between;
+    margin-left: 5%;
+    margin-top: auto;
   }
 }
 

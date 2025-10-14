@@ -17,15 +17,27 @@
     <div class="container header__inner">
       <a class="brand" href="/">TastyTreats</a>
 
-      <!-- Mobile menu: details/summary is accessible and keyboard-friendly -->
+      <!-- Desktop header options-->
+      <div class="desktop_header">
+        <ul class="desktop_nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pages/recipes.html">Recipes</a></li>
+          <li><a href="pages/blog.html">Blog</a></li>
+          <li><a href="pages/about_us.html">About</a></li>
+          <li><a href="/" href="#">Random Recipe!</a></li>
+        </ul>
+      </div>
+
+      <!-- Mobile menu: -->
       <details class="nav" role="navigation">
         <summary class="nav__toggle" aria-label="Toggle navigation">Menu</summary>
         <nav aria-label="Primary">
           <ul class="nav__list">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Recipes</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">About</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="pages/recipes.html">Recipes</a></li>
+            <li><a href="pages/blog.html">Blog</a></li>
+            <li><a href="pages/about_us.html">About</a></li>
+            <li><a href="/" href="#">Random Recipe!</a></li>
             <li><a class="button button--primary" href="#">Contact</a></li>
           </ul>
         </nav>
