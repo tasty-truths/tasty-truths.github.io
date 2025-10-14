@@ -158,6 +158,12 @@ img { max-width: 100%; height: auto; display: block; }
   }
 }
 
+@media (max-width: 767px) {
+  .desktop_header {
+    display: none;
+  }
+}
+
 /* ---------- Buttons ---------- */
 .button {
   display: inline-block;

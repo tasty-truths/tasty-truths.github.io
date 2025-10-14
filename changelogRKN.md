@@ -8,3 +8,4 @@ This is for tracking work on the project
 -- Linked image to index, I don't like the placement but it's there
 -- Started header section for desktop version 
 -- Added boilerplate html for about_us, blog, recipes, and sign_up pages in pages folder
+-- Fixed CSS typo from last merge to hide desktop header on mobile (767px, not 767)
