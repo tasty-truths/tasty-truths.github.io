@@ -1,0 +1,25 @@
+.header img {
+    width: 100px;
+    height: auto;
+}
+
+.header .links {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 20px;
+}
+
+.header .links a{
+    margin-left: 20px;
+}
+
+.hero {
+    display: flex;
+    flex-direction: row;
+}
+
+.hero img {
+    width: 25%;
+    height: auto;
+}

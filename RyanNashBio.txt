@@ -1,1 +1,1 @@
-Hello my name is Ryan Nash. I am a transfer student from Bucks County Community College. I have experience in Python, Rust, HTML, CSS, Java and several database techniques. I look forward to sharing my knowledge while gaining experience.
+Hello my name is Ryan Nash. I am a transfer student from Bucks County Community College. I have experience in Python, Rust, HTML, CSS, Java and several database techniques. I look forward to sharing my knowledge while gaining experience, and believe that I can bring a lot to the table to get this project up and running.
