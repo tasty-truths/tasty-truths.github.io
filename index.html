@@ -8,12 +8,25 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <header class="header">
-      <div>
-        <img src="assets/images/logo_main.png">
-        <div class="links">
-          <a href="pages/about_us.html">About Us</a>
-          <a href="pages/login.html">Login</a>
+    <header>
+      <div class="header-container">
+        <div class="logo">
+          <img href="assets/images/logo_main.png">
+        </div>
+
+        <nav class="main-nav">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="auth-links">
+          <a href="login.html" class="login">Login</a>
+          <a href="signup.html" class="signup">Sign Up</a>
         </div>
       </div>
     </header>
@@ -30,9 +43,9 @@
     </main>
 
     <footer>
-      <small>&copy; 2025</small>
+      <small id="copy">&copy; 2025</small>
     </footer>
 
-    <script src="path/to/your/script.js"></script>
+    <script src="path/to/script.js"></script>
   </body>
 </html>
