@@ -6,7 +6,7 @@
     padding: 20px;
 }
 
-.logo {
+.logo img {
     align-self: start;
     justify-self: start;
     width: 100px;
@@ -25,6 +25,11 @@
     margin-left: 20px;
 }
 
+.main-nav a:hover,
+.auth-links a:hover {
+    color: #123013;
+}
+
 .auth-links {
     display: flex;
     flex-direction: column;
@@ -32,8 +37,9 @@
     align-content: end;
 }
 
-.header .links a{
-    margin-left: 20px;
+.auth-links a {
+    margin-top: 5px;
+    text-decoration: none;
 }
 
 body {
