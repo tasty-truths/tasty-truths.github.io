@@ -5,12 +5,21 @@
     <title>Tasty Truths</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Short page description." />
-    <link rel="icon" type="image/png" href="/assets/favicon/favicon-96x96.png" sizes="96x96" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/assets/favicon/favicon-96x96.png"
+      sizes="96x96"
+    />
     <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg" />
     <link rel="shortcut icon" href="/assets/favicon/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/assets/favicon/apple-touch-icon.png"
+    />
     <link rel="manifest" href="/assets/favicon/site.webmanifest" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
@@ -18,11 +27,12 @@
     <header>
       <div class="header-container">
         <div class="logo">
-          <img src="../assets/images/logo_main.png">
+          <img src="../assets/images/logo_main.png" />
         </div>
 
         <nav class="main-nav">
           <a href="../index.html">Home</a>
+          <a href="about_us.html">About</a>
           <a href="recipes.html">Recipes</a>
           <a href="blog.html">Blog</a>
           <a href="contact.html">Contact</a>
@@ -37,25 +47,53 @@
 
     <div class="layout">
       <!-- Posts list (index page) -->
-      <section class="post-list" aria-label="Recent posts" itemscope itemtype="https://schema.org/Blog">
-        <article class="post-card" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+      <section
+        class="post-list"
+        aria-label="Recent posts"
+        itemscope
+        itemtype="https://schema.org/Blog"
+      >
+        <article
+          class="post-card"
+          itemprop="blogPost"
+          itemscope
+          itemtype="https://schema.org/BlogPosting"
+        >
           <header>
-            <h2 itemprop="headline"><a href="/posts/example-post.html" itemprop="url">Example Post Title</a></h2>
+            <h2 itemprop="headline">
+              <a href="/posts/example-post.html" itemprop="url"
+                >Example Post Title</a
+              >
+            </h2>
             <p class="post-meta">
-              <time datetime="2025-10-19" itemprop="datePublished">October 19, 2025</time>
-              · <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+              <time datetime="2025-10-19" itemprop="datePublished"
+                >October 19, 2025</time
+              >
+              ·
+              <span
+                itemprop="author"
+                itemscope
+                itemtype="https://schema.org/Person"
+              >
                 <span itemprop="name">Your Name</span>
               </span>
               · <a href="/tags/html.html" rel="tag">HTML</a>
             </p>
           </header>
           <figure class="post-thumb">
-            <img src="/assets/example.jpg" alt="Descriptive alt text">
+            <img src="/assets/example.jpg" alt="Descriptive alt text" />
           </figure>
           <p class="post-excerpt" itemprop="description">
             A short excerpt from the article to entice readers to click through…
           </p>
-          <p><a class="read-more" href="/posts/example-post.html" aria-label="Read more: Example Post Title">Read more →</a></p>
+          <p>
+            <a
+              class="read-more"
+              href="/posts/example-post.html"
+              aria-label="Read more: Example Post Title"
+              >Read more →</a
+            >
+          </p>
         </article>
 
         <!-- repeat <article> blocks for more posts -->
@@ -95,12 +133,24 @@
     </div>
 
     <!-- Single post template (use on post pages) -->
-    <article class="post" hidden itemscope itemtype="https://schema.org/BlogPosting">
+    <article
+      class="post"
+      hidden
+      itemscope
+      itemtype="https://schema.org/BlogPosting"
+    >
       <header>
         <h1 itemprop="headline">Single Post Title</h1>
         <p class="post-meta">
-          <time datetime="2025-10-19" itemprop="datePublished">October 19, 2025</time>
-          · <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+          <time datetime="2025-10-19" itemprop="datePublished"
+            >October 19, 2025</time
+          >
+          ·
+          <span
+            itemprop="author"
+            itemscope
+            itemtype="https://schema.org/Person"
+          >
             <span itemprop="name">Your Name</span>
           </span>
           · <span itemprop="wordCount">1200 words</span>
@@ -114,7 +164,7 @@
         <pre><code>// code samples</code></pre>
         <blockquote>Nice pull-quote.</blockquote>
         <figure>
-          <img src="/assets/photo.jpg" alt="Alt text">
+          <img src="/assets/photo.jpg" alt="Alt text" />
           <figcaption>Caption for the image.</figcaption>
         </figure>
       </div>
@@ -123,10 +173,16 @@
       <section class="comments" aria-label="Comments">
         <h2>Comments</h2>
 
-        <article class="comment" itemscope itemtype="https://schema.org/Comment">
+        <article
+          class="comment"
+          itemscope
+          itemtype="https://schema.org/Comment"
+        >
           <header>
             <strong itemprop="author">Jane Doe</strong>
-            <time datetime="2025-10-18" itemprop="datePublished">Oct 18, 2025</time>
+            <time datetime="2025-10-18" itemprop="datePublished"
+              >Oct 18, 2025</time
+            >
           </header>
           <p itemprop="text">Great post!</p>
         </article>
@@ -135,7 +191,7 @@
           <h3>Leave a comment</h3>
           <label>
             Name
-            <input type="text" name="name" required>
+            <input type="text" name="name" required />
           </label>
           <label>
             Comment
@@ -148,7 +204,7 @@
 
     <footer>
       <small>&copy; 2025</small>
-    </footer>   
+    </footer>
 
     <script src="path/to/script.js"></script>
   </body>
