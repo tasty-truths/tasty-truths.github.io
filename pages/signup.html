@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <title>Tasty Truths</title>
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Short page description." />
+    <title>Login Page</title>
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
@@ -17,6 +16,7 @@
 
         <nav class="main-nav">
           <a href="../index.html">Home</a>
+          <a href="about_us.html">About</a>
           <a href="recipes.html">Recipes</a>
           <a href="blog.html">Blog</a>
           <a href="contact.html">Contact</a>
@@ -29,14 +29,15 @@
       </div>
     </header>
 
-    <main>
-      <p>Content goes here.</p>
-    </main>
+    <h2>Sign Up</h2>
 
-    <footer>
-      <small>&copy; 2025</small>
-    </footer>
+    <label for="username">Username:</label><br />
+    <input type="text" id="username" name="username" required /><br /><br />
 
-    <script src="path/to/script.js"></script>
+    <label for="password">Password:</label><br />
+    <input type="password" id="password" name="password" required /><br /><br />
+
+    <button type="submit">Login</button>
+    <button type="button">Cancel</button>
   </body>
 </html>
