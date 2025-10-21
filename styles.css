@@ -59,3 +59,9 @@ body {
 #copy {
     color: blue;
 }
+
+/* Sign up form */
+.signup-form .form{
+    display:flex;
+    flex-direction: column;
+}
