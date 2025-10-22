@@ -26,7 +26,7 @@
     <header>
       <div class="header-container">
         <div class="logo">
-          <img src="../assets/images/logo_main.png" />
+          <a href="../index.html"><img src="../assets/images/logo_main.png" /></a>
         </div>
 
         <nav class="main-nav">
@@ -46,24 +46,24 @@
 
     <div class="signup-form">
       <form action="/signup" method="post">
-        <h2>Create Your Account</h2>
+        <h2>Create An Account!</h2>
 
-        <label for="firstName">First Name</label>
-        <input type="text" id="firstName" name="firstName" required />
+        <label for="firstName">First Name</label><br />
+        <input type="text" id="firstName" name="firstName" required /><br />
 
-        <label for="lastName">Last Name</label>
-        <input type="text" id="lastName" name="lastName" required />
+        <label for="lastName">Last Name</label><br />
+        <input type="text" id="lastName" name="lastName" required /><br />
 
-        <label for="email">Email Address</label>
+        <label for="email">Email Address</label><br />
         <input
           type="email"
           id="email"
           name="email"
           placeholder="you@example.com"
           required
-        />
+        /><br />
 
-        <label for="username">Username</label>
+        <label for="username">Username</label><br />
         <input
           type="text"
           id="username"
@@ -71,30 +71,30 @@
           minlength="3"
           maxlength="20"
           required
-        />
+        /><br />
 
-        <label for="password">Password</label>
+        <label for="password">Password</label><br />
         <input
           type="password"
           id="password"
           name="password"
           minlength="8"
           required
-        />
+        /><br />
 
-        <label for="confirmPassword">Confirm Password</label>
+        <label for="confirmPassword">Confirm Password</label><br />
         <input
           type="password"
           id="confirmPassword"
           name="confirmPassword"
           minlength="8"
           required
-        />
+        /><br />
 
-        <label for="dob">Date of Birth</label>
-        <input type="date" id="dob" name="dob" required />
+        <label for="dob">Date of Birth</label><br />
+        <input type="date" id="dob" name="dob" required /><br />
 
-        <label for="gender">Gender</label>
+        <label for="gender">Gender</label><br />
         <select id="gender" name="gender" required>
           <option value="">Select</option>
           <option value="female">Female</option>
@@ -102,19 +102,19 @@
           <option value="nonbinary">Non-binary</option>
           <option value="other">Other</option>
           <option value="prefer_not_say">Prefer not to say</option>
-        </select>
+        </select><br /><br /><br />
 
         <div class="terms">
           <input type="checkbox" id="terms" name="terms" required />
           <label for="terms"
             >I agree to the <a href="/terms">Terms of Service</a> and
             <a href="/privacy">Privacy Policy</a>.</label
-          >
+          ><br /><br />
         </div>
 
         <button type="submit">Sign Up</button>
 
-        <p>Already have an account? <a href="/login">Log in</a></p>
+        <p>Already have an account? <a href="login.html">Log in</a></p>
       </form>
     </div>
   </body>
