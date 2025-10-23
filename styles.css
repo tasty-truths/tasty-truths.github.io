@@ -28,6 +28,30 @@
 .main-nav a:hover,
 .auth-links a:hover {
   color: #123013;
+  border-radius: 10px;
+  background-color: transparent;
+  padding: 10px;
+}
+
+.button{
+  display: inline-block;
+  background-color: transparent;
+  color: #000000;
+  text-align: center;
+  justify-content: center;
+  align-content: end;
+  padding: 10px;
+  background-color: white;
+  transition: background-color 0.3s;
+  border-radius: 10px;
+  transition: border-radius 0.3s;
+  
+}
+
+.button:hover {
+  color: #000000;
+  background-color: white;
+  border-radius: 10px
 }
 
 .auth-links {
@@ -72,3 +96,4 @@ body {
   width: 300px;
   margin: auto;
 }
+
