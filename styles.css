@@ -72,3 +72,23 @@ body {
   width: 300px;
   margin: auto;
 }
+
+/* Contact us form */
+
+.contact-us{
+  background-color: white;
+  width: 50%;
+  text-align: center;
+}
+
+.contact-us h2{
+  background-color: blue;
+  border: solid black;
+  color: white;
+}
+
+.contact-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+}
