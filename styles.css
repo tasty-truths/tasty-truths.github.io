@@ -51,6 +51,18 @@ body {
   flex-direction: row;
 }
 
+.hero_right {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100vh;
+}
+
+.hero_right_t_img {
+  display: grid;
+  grid-area: auto;
+
+}
+
 .hero img {
   width: 25%;
   height: auto;
