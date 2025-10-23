@@ -1,0 +1,43 @@
+Two Palettes:
+    https://coolors.co/palette/cc5803-e2711d-ff9505-ffb627-ffc971
+    (Orange)
+    #CC5803
+    #E2711D
+    #FF9505
+    #FFB627
+    #FFC971
+
+
+    https://coolors.co/palette/132a13-31572c-4f772d-90a955-ecf39e
+    (Green)
+    #132A13
+    #31572C
+    #4F772D
+    #90A955
+    #ECF39E
+
+Fonts:
+Lato
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+
+
+Atma
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atma:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+Bitcount Grid Single
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Single:wght@100..900&display=swap" rel="stylesheet">
+
+
+BBH Sans Bogle
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=BBH+Sans+Bogle&display=swap" rel="stylesheet">
+
+
