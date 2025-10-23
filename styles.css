@@ -130,3 +130,50 @@ body {
   width: 300px;
   margin: auto;
 }
+
+/* Contact us form */
+
+.contact-us{
+  background-color: rgb(180, 178, 178);
+  width: 60%;
+  text-align: center;
+  
+}
+
+.contact-us h2{
+  background-color: blue;
+  color: white;
+  margin: 0;
+  padding: 15px;
+  border-left: 3px solid black;
+  border-right: 3px solid black;
+  border-top: 3px solid black;
+}
+
+.contact-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-right: 3px solid black;
+  border-left: 2px solid black;
+  border-bottom: 3px solid black;
+  border-top: 3px solid black;
+  
+
+}
+
+.contact-box{
+  padding: 10px;
+  border-left: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.contact-box ion-icon{
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+ion-icon[name="logo-facebook"]{
+  color: blue;
+  outline: black;
+}
+
