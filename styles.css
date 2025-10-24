@@ -170,28 +170,36 @@ body {
 /* Contact section (optional tidy) */
 .contact-us {
   background-color: rgb(180, 178, 178);
-  width: min(900px, 95%);
-  margin: 24px auto;
+  width: 60%;
   text-align: center;
-  border: 3px solid black;
-  border-radius: 8px;
-  overflow: hidden; /* keep borders clean */
 }
+
 .contact-us h2 {
   background-color: blue;
   color: white;
   margin: 0;
   padding: 15px;
-  border-bottom: 3px solid black;
+  border-left: 3px solid black;
+  border-right: 3px solid black;
+  border-top: 3px solid black;
 }
 .contact-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: 1fr 1fr;
+  border-right: 3px solid black;
+  border-left: 2px solid black;
+  border-bottom: 3px solid black;
+  border-top: 3px solid black;
 }
 .contact-box {
-  padding: 12px;
-  border-top: 1px solid black;
+  padding: 10px;
   border-left: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.contact-box ion-icon {
+  font-size: 36px;
+  margin-bottom: 10px;
 }
 
 ion-icon[name="logo-facebook"] {
