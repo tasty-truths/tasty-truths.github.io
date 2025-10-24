@@ -1,64 +1,67 @@
+/* Header */
 .header-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 16px 20px;
 }
 
 .logo img {
-  align-self: start;
-  justify-self: start;
-  width: 100px;
+  width: 120px;
   height: auto;
 }
 
+/* Navigation */
 .main-nav {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-content: end;
-  padding: 10px;
+  align-items: center;
+  gap: 20px;
+  padding: 10px 0;
 }
 
-.main-nav a {
-  margin-left: 20px;
+.main-nav a,
+.auth-links a {
+  text-decoration: none;
+  padding: 10px 12px;
+  border-radius: 10px;
+  transition: background-color 0.25s ease, color 0.25s ease,
+    transform 0.08s ease;
 }
 
 .main-nav a:hover,
 .auth-links a:hover {
   color: #123013;
-  border-radius: 10px;
-  background-color: transparent;
-  padding: 10px;
+  background-color: rgba(18, 48, 19, 0.08);
 }
 
-.button{
+/* Buttons */
+.button {
   display: inline-block;
-  background-color: transparent;
-  color: #000000;
+  background-color: white;
+  color: #000;
   text-align: center;
-  justify-content: center;
-  align-content: end;
-  padding: 10px;
-  background-color: white;
-  transition: background-color 0.3s;
+  padding: 10px 14px;
   border-radius: 10px;
-  transition: border-radius 0.3s;
-  
+  transition: background-color 0.25s ease, color 0.25s ease,
+    transform 0.08s ease;
 }
-
 .button:hover {
-  color: #000000;
   background-color: white;
-  border-radius: 10px
+  transform: translateY(-1px);
+}
+.button.signup {
+  font-weight: 600;
+  outline: 2px solid #12301310;
 }
 
+/* Auth links: column on desktop; row on mobile in media query */
 .auth-links {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-content: end;
+  gap: 6px;
 }
 
 .auth-links a {
@@ -66,43 +69,57 @@
   text-decoration: none;
 }
 
+/* Base */
 body {
   background-color: rgb(123, 162, 128);
+  color: #0e2010;
+  line-height: 1.5;
 }
 
-/* top of index */
+/* Index top */
 .index_top {
   text-align: center;
   text-decoration: overline;
   color: rgb(65, 97, 28);
 }
 
-/* hero */
-
+/* Hero */
 .hero {
   display: flex;
-  gap: 1rem; /* optional spacing between left and right */
+  flex-wrap: wrap;
+  gap: 1.5rem;
   width: 100%;
+  align-items: center;
+  padding: 32px 0;
 }
 
-/* Left = half */
 .hero_left {
-  flex: 0 0 33%;
-  max-width: 33%;
-  height: auto;
-  display: block;
-  object-fit: cover;
+  flex: 1 1 320px;
+  max-width: 520px;
+}
+.hero_left h1 {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  margin: 0 0 0.5rem 0;
+}
+.hero_tagline {
+  font-size: 1.1rem;
+  margin: 0 0 1rem 0;
+}
+.hero_cta {
+  display: flex;
+  gap: 0.75rem;
+  margin: 0.5rem 0 1rem 0;
+}
+.hero_points {
+  margin: 0;
+  padding-left: 1rem;
 }
 
-/* Right = half, column layout (grid on top, text below) */
 .hero_right {
-  flex: 0 0 66%;
-  max-width: 66%;
+  flex: 1 1 420px; /* lets grid breathe on wide screens */
   display: flex;
   flex-direction: column;
 }
-
-/* The image grid */
 .hero_right_t_img {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -110,7 +127,6 @@ body {
   grid-auto-flow: dense;
   gap: 0.5rem;
 }
-
 .hero_right_t_img img {
   width: 100%;
   height: 100%;
@@ -118,7 +134,6 @@ body {
   display: block;
   border-radius: 12px;
 }
-
 /* Size variants to create visual variety */
 .hero_right_t_img img.wide {
   grid-column: span 2;
@@ -131,72 +146,70 @@ body {
   grid-row: span 2;
 }
 
-/* Keep the paragraph below the photos */
 .hero_right_b {
   margin-top: 1rem;
 }
 
 /* footer */
-
 #copy {
   color: blue;
 }
 
-/* Sign up form */
-
+/* Signup form */
 .signup-form {
   display: flex;
   flex-direction: column;
   background-color: #a0e1ac;
   padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 300px;
-  margin: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+  width: min(500px, 92%);
+  margin: 24px auto;
 }
 
-/* Contact us form */
-
-.contact-us{
+/* Contact section (optional tidy) */
+.contact-us {
   background-color: rgb(180, 178, 178);
-  width: 60%;
+  width: min(900px, 95%);
+  margin: 24px auto;
   text-align: center;
-  
+  border: 3px solid black;
+  border-radius: 8px;
+  overflow: hidden; /* keep borders clean */
 }
-
-.contact-us h2{
+.contact-us h2 {
   background-color: blue;
   color: white;
   margin: 0;
   padding: 15px;
-  border-left: 3px solid black;
-  border-right: 3px solid black;
-  border-top: 3px solid black;
-}
-
-.contact-grid{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  border-right: 3px solid black;
-  border-left: 2px solid black;
   border-bottom: 3px solid black;
-  border-top: 3px solid black;
-  
-
 }
-
-.contact-box{
-  padding: 10px;
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+.contact-box {
+  padding: 12px;
+  border-top: 1px solid black;
   border-left: 1px solid black;
-  border-bottom: 1px solid black;
 }
 
-.contact-box ion-icon{
-  font-size: 36px;
-  margin-bottom: 10px;
-}
-
-ion-icon[name="logo-facebook"]{
+ion-icon[name="logo-facebook"] {
   color: blue;
   outline: black;
+}
+
+/* Layout helper */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Mobile tweaks */
+@media (max-width: 768px) {
+  .auth-links {
+    flex-direction: row;
+    align-items: center;
+  }
 }
