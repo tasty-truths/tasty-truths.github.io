@@ -172,6 +172,7 @@ body {
   background-color: rgb(180, 178, 178);
   width: 60%;
   text-align: center;
+  margin: auto;
   border-radius: 8px;
   overflow: hidden; /* keep borders clean */
 }
