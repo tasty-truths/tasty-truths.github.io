@@ -1,5 +1,72 @@
 Instructions to ensure how to safely branch, commit, and push changes to our project while keeping the main branch stable. 
 
-To start safely working on the project, you want to ensure you are not working on the main branch. If this is your first time modifying these files, use git clone https://gitlab.cci.drexel.edu/cid/2526/fw1023/d3/tasty_truths.git to clone the project on your computer. Now that you have the project files on your computer, you are ready to start editing. First, you want to create a new branch when editing or adding code to the project. To do this you use git checkout -b your-branch-name. This ensures that our main branch stays the same, in case the added or edited code breaks something or does not allign with what is currently in the project. Once you are in a seperate branch, you are good to make your changes to the code or add code. Open up your perfered code editor and start writing your new code or edit the code that wasnt working. When you are done editing or writing code in your code editor, test the code to make sure that is working properly. When you are sure that your edditing or new code is working properly you are ready to stage and commit your work to the main branch. To start, mae sure you save your code, you can use command s or save it using the save button. Once your code is saved you want to use the git add . command in your terminal. This adds your editing or new code to the staging area which you can than commit to the main branch. To do this use got commit - m "description" in your terminal. This will save a snpachat of your saved changes or added code into a timeline. You also want to make sure to add a short but clear message as a description in your commit command to let users now what it is doing. An example of this could be git commit -m "Added responsive design to homepage". After you have done this you are ready to push your work to the main branch. To do this use git push origin your-branch-name, and make sure to change your-branch-name to the branch you were working in. Now you are ready to create a pull request. To do this, go to the repository on Gitlab and click compare & pull request next to your branch. Add a description detailing what you have changed or added. Submit this request and one of the team member will review and approve before you merge it to the main branch. Once your pull request has been reviewed and approved, you are ready to merge. To merge use git checkout your-branch-name replacing your-branch-name whith the branch you were working in. Than use git merge main to put your added or edited code into the main project file. If you are having trouble with this you may be out of sync with the main branch. To fix this use git checkout main and than git pull origin main to make sure your local copy is the same as the main. Than use git checkout your-name-branch, replacing your-name-branch with the branch you are working in, and than git merge main. You are then done, and all of your added or editied code should ppear in the main branch where everyone can see. 
+1. Clone the Repository
 
-Thank you for reading these instructions and ensuring that everything is done in a safe and correct manner. Enjoy the rest of your day. 
+If this is your first time contributing, start by cloning the project to your local machine:
+
+git clone https://gitlab.cci.drexel.edu/cid/2526/fw1023/d3/tasty_truths.git
+
+This creates a local copy of the repository that you can work on.
+
+2. Create a New Branch
+
+Before making any changes, make sure you’re not working on the main branch.
+Create a new branch for your work:
+
+git checkout -b your-branch-name
+
+Replace your-branch-name with something descriptive (e.g., fix-navbar-bug or add-recipe-page).
+This keeps your work isolated and prevents breaking the main project.
+
+3. Make and Test Your Changes
+
+Open your preferred code editor and begin writing or editing code.
+Once finished, test your changes to make sure everything works properly.
+
+Save all modified files before continuing.
+
+4. Stage and Commit Your Changes
+
+Add your changes to the staging area:
+
+git add .
+
+Then commit your changes with a clear, descriptive message:
+
+git commit -m "Added responsive design to homepage"
+
+A good commit message briefly explains what was changed or fixed.
+
+5. Push Your Branch
+
+When your code is tested and committed, push your branch to GitLab:
+
+git push origin your-branch-name
+
+Make sure to replace your-branch-name with the branch you created.
+
+6. Create a Merge Request (Pull Request)
+
+After pushing your branch, open GitLab and click “Compare & Merge Request” next to your branch.
+Add a short description explaining what you changed or added.
+
+Once submitted, another team member will review and approve your merge request before it’s added to the main branch.
+
+7. Sync with Main (If Needed)
+
+If you encounter merge conflicts or your branch is out of sync with the latest main, do the following:
+
+git checkout main
+git pull origin main
+git checkout your-branch-name
+git merge main
+
+Resolve any conflicts if prompted, test your changes again, and push the updated branch.
+
+8. Final Merge
+
+After your merge request is approved, it will be merged into main.
+Your changes are now part of the official project — great job!
+
+Thank you for following these steps and helping keep our project organized and stable.
+Happy coding!
