@@ -171,11 +171,11 @@ body {
 .contact-us {
   background-color: rgb(180, 178, 178);
   width: 60%;
-  margin: auto;
   text-align: center;
   border-radius: 8px;
   overflow: hidden; /* keep borders clean */
 }
+
 .contact-us h2 {
   background-color: blue;
   color: white;
@@ -184,7 +184,6 @@ body {
   border-left: 3px solid black;
   border-right: 3px solid black;
   border-top: 3px solid black;
-
 }
 .contact-grid {
   display: grid;
@@ -193,11 +192,16 @@ body {
   border-left: 2px solid black;
   border-bottom: 3px solid black;
   border-top: 3px solid black;
-
 }
 .contact-box {
   padding: 10px;
   border-left: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.contact-box ion-icon {
+  font-size: 36px;
+  margin-bottom: 10px;
   border-bottom: 1px solid black;
 }
 
