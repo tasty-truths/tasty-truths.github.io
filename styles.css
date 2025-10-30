@@ -171,6 +171,7 @@ body {
 .contact-us {
   background-color: rgb(180, 178, 178);
   width: 60%;
+  margin: auto;
   text-align: center;
   border-radius: 8px;
   overflow: hidden; /* keep borders clean */
