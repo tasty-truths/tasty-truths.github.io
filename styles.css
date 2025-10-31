@@ -230,3 +230,78 @@ ion-icon[name="logo-facebook"] {
     align-items: center;
   }
 }
+
+/* ============ Blog preview cards ===================== */
+.blog-preview-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  margin: 24px auto;
+}
+
+.blog-card {
+  background: #fff;
+  color: inherit;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  overflow: hidden;
+  transition: transform 0.08s ease, box-shadow 0.25s ease;
+}
+.blog-card:hover,
+.blog-card:focus-within {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+}
+
+.blog-card > a:first-child {
+  display: block;
+  aspect-ratio: 16 / 9;           /* keeps images even */
+  overflow: hidden;
+}
+.blog-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.blog-card h2 {
+  font-size: 1.1rem;
+  line-height: 1.3;
+  margin: 12px 12px 6px;
+}
+.blog-card h2 a {
+  color: inherit;
+  text-decoration: none;
+}
+.blog-card h2 a:hover {
+  text-decoration: underline;
+}
+
+.blog-card p {
+  margin: 0 12px 12px;
+  color: rgba(14,32,16,0.8);
+}
+
+/* CTA link styled to match your button/hover vibe */
+.blog-card .read-more {
+  display: inline-block;
+  margin: 0 12px 14px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #fff;
+  color: #123013;
+  text-decoration: none;
+  outline: 1px solid #12301310;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.08s ease;
+}
+.blog-card .read-more:hover,
+.blog-card .read-more:focus {
+  background-color: rgba(18, 48, 19, 0.08);
+  transform: translateY(-1px);
+}
+/* Mobile tweaks for blog cards */
+@media (max-width: 420px) {
+  .blog-preview-container { gap: 14px; }
+  .blog-card h2 { font-size: 1.05rem; }
+}
