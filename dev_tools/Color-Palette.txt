@@ -16,6 +16,8 @@ Two Palettes:
     #90A955
     #ECF39E
 
+background-color: rgb(123, 162, 128);
+
 Fonts:
 Lato
 <link rel="preconnect" href="https://fonts.googleapis.com">
