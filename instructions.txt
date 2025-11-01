@@ -1,0 +1,48 @@
+=========================================================
+CREATE A VIRTUAL ENVIRONMENT
+=========================================================
+MAC:
+python -m venv .venv && source .venv/bin/activate 
+
+WINDOWS:
+python -m venv .venv
+.venv\Scripts\activate
+
+=========================================================
+INSTALL ALL REQUIREMENTS FOR THE PROJECT
+=========================================================
+pip install -r requirements.txt
+
+=========================================================
+RUN IT
+=========================================================
+MAC
+python3 app.py
+
+WINDOWS:
+python app.py
+
+=========================================================
+ADD AT LEAST THESE LINES TO YOUR .gitignore:
+=========================================================
+.gitignore
+.DS_store
+*.pyc
+__pycache__/
+.venv
+instance/*.db
+instance/*.sqlite
+instance/*.sqlite3
+
+=========================================================
+EXAMPLE TEST USAGE
+=========================================================
+MAC:
+curl -X POST http://127.0.0.1:5000/api/recipes \
+     -H "Content-Type: application/json" \
+     -d '{"title":"Chicken Tikka Masala","content":"..." }'
+
+POWERSHELL:
+$body = @{ title = "Chicken Tikka Masala"; content = "..." } | ConvertTo-Json
+Invoke-RestMethod -Method Post -Uri "http://127.0.0.1:5000/api/recipes" `
+  -ContentType "application/json" -Body $body
