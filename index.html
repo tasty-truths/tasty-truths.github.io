@@ -5,6 +5,15 @@
     <title>Tasty Truths</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Short page description." />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+
     <link
       rel="icon"
       type="image/png"
@@ -19,7 +28,7 @@
       href="/assets/favicon/apple-touch-icon.png"
     />
     <link rel="manifest" href="/assets/favicon/site.webmanifest" />
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="../styles.css" />
   </head>
   <body>
     <!-- header that can be used for all pages with small tweaks to links-->
@@ -88,8 +97,21 @@
       </section>
     </main>
 
-    <footer>
-      <small id="copy">&copy; 2025</small>
+    <footer class="footer">
+      <small>&copy; 2025</small>
+      <a href="mailto:tastytruths@gmail.com"
+        ><ion-icon name="mail-outline"></ion-icon
+      ></a>
+      <a href="tel:+1234567890"><ion-icon name="call-outline"></ion-icon></a>
+      <a href="https:www.instagram.com" target="_blank"
+        ><ion-icon name="logo-instagram"></ion-icon
+      ></a>
+      <a href="https:www.facebook.com" target="_blank"
+        ><ion-icon name="logo-facebook"></ion-icon
+      ></a>
+      <a href="https:www.youtube.com" target="_blank"
+        ><ion-icon name="logo-youtube"></ion-icon
+      ></a>
     </footer>
 
     <script src="path/to/script.js"></script>

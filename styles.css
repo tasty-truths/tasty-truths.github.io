@@ -306,6 +306,13 @@ ion-icon[name="logo-instagram"]{
 /* =========================================================
    FOOTER
    ========================================================= */
+.footer {
+  text-align: center;
+  padding: var(--space-3) 0;
+  font-size: 0.9rem;
+  color: var(--color-muted-text);
+}
+
 #copy { color: var(--color-info); }
 
 /* =========================================================
