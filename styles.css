@@ -295,6 +295,14 @@ ion-icon[name="logo-facebook"] {
   outline: var(--color-border);
 }
 
+ion-icon[name="logo-youtube"]{
+  color: #FF0000;
+}
+
+ion-icon[name="logo-instagram"]{
+  color:#E1306C;
+}
+
 /* =========================================================
    FOOTER
    ========================================================= */
