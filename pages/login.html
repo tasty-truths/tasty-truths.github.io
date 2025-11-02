@@ -30,17 +30,18 @@
     <link rel="manifest" href="/assets/favicon/site.webmanifest" />
     <link rel="stylesheet" href="../styles.css" />
   </head>
+
   <body>
     <!-- header that can be used for all pages with small tweaks to links-->
     <header class="site-header">
-      <div class="header-container">
+      <div class="header-container container">
         <div class="logo">
-          <a href="../index.html"
-            ><img src="../assets/images/logo_main.png"
-          /></a>
+          <a href="../index.html">
+            <img src="../assets/images/logo_main.png" alt="Tasty Truths" />
+          </a>
         </div>
 
-        <nav class="main-nav">
+        <nav class="main-nav" aria-label="Primary">
           <a href="about_us.html">About</a>
           <a href="recipes.html">Recipes</a>
           <a href="blog.html">Blog</a>
@@ -48,22 +49,29 @@
         </nav>
 
         <div class="auth-links">
-          <a class="button" href="login.html" class="login">Login</a>
-          <a href="signup.html" class="signup">Sign Up</a>
+          <a href="login.html" class="button">Login</a>
+          <a href="signup.html" class="button signup">Sign Up</a>
         </div>
       </div>
     </header>
+    
+    <div class="login-form">
+      <form action="/login" method="post">
+        <h2>Login</h2>
 
-    <h2>Login</h2>
+        <label for="username">Username:</label><br />
+        <input type="text" id="username" name="username" placeholder="username123" required /><br /><br />
 
-    <label for="username">Username:</label><br />
-    <input type="text" id="username" name="username" required /><br /><br />
+        <label for="password">Password:</label><br />
+        <input type="password" id="password" name="password" required /><br /><br />
 
-    <label for="password">Password:</label><br />
-    <input type="password" id="password" name="password" required /><br /><br />
+        <button type="submit">Login</button>
+        <button type="button" onclick="window.location.href='../index.html'">Cancel</button>
 
-    <button type="submit">Login</button>
-    <button type="button">Cancel</button>
+        <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+      </form>
+    </div>
+
   </body>
 
   <footer class="footer">
