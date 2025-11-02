@@ -79,6 +79,7 @@ body {
   line-height: 1.5;
   margin: 0;
   padding-top: 150px;
+  padding-bottom: 100px;
 }
 
 /* Utility container */
@@ -107,7 +108,6 @@ body {
 }
 
 .header-container {
-
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -276,6 +276,9 @@ body {
 /* =========================================================
    CONTACT SECTION
    ========================================================= */
+ .contact-body {
+  padding-top: 200px;
+
 .contact-us {
   background-color: var(--color-surface-muted);
   width: 60%;
