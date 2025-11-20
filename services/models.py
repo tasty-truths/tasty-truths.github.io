@@ -1,6 +1,7 @@
 # services/models.py
 from datetime import datetime
 from sqlalchemy import event
+from flask_login import UserMixin
 from services.db import db
 from utilities.slug import base_slug, uniquify_slug
 
@@ -41,3 +42,12 @@ def recipe_before_update(mapper, connection, target: Recipe):
         target.slug = uniquify_slug(session, Recipe, new_base, exclude_id=target.id)
         if old_slug != target.slug:
             session.add(RecipeSlugHistory(recipe_id=target.id, old_slug=old_slug))
+
+class User(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    password_hash = db.Column(db.String(255), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f"<User {self.username}>"
