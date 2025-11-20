@@ -1,3 +1,0 @@
-Hello, my name is Sean Farkas. I am a transfer student at Drexel. I have experience in Java, Python, and some HTML.
-I am a hard worker and I strive to put out the best products possible. I am building a website made for cooks, and those who enjoy
-making food. 

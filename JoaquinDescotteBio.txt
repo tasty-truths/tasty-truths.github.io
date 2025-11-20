@@ -1,4 +1,0 @@
- 
-"Hi, my name is Joaquin Descotte and I am a transfer student from Bucks County Community College and my major here at drexel is Computer Science. 
-I am originally from Buenos Aires, Argentina, and I moved here to the US almost 4 years ago, so I have plenty of experience with dealing with people with different cultural values and mindsets. I also have experience with Python, Java, HTML, CSS, MySQL, and Git. 
-Currently I am in a team that is building a website that helps people (whether its your professional cooker or just an everyday person cooking for theirselves) find recipes, and post recipes so that everyone has access to delicious meals" 
