@@ -40,7 +40,7 @@ def create_app():
         return app.send_static_file("index.html")
     
     # --- API endpoints, not pages ---
-
+    """
     @app.route("/api/auth/me")
     def who_am_i():
         # return login state (based on session / Flask-Login)
@@ -65,7 +65,7 @@ def create_app():
     @app.route("/api/blog")
     def list_blog_posts():
         ...
-
+    """
     # ---- login manager user loader ----
     @login_manager.user_loader
     def load_user(user_id: str):
