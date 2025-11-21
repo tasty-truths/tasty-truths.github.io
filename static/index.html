@@ -28,7 +28,7 @@
       href="/assets/favicon/apple-touch-icon.png"
     />
     <link rel="manifest" href="/assets/favicon/site.webmanifest" />
-    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
   </head>
   <body>
     <!-- header that can be used for all pages with small tweaks to links-->
@@ -114,6 +114,6 @@
       ></a>
     </footer>
 
-    <script src="path/to/script.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
   </body>
 </html>

@@ -15,7 +15,7 @@ csrf = CSRFProtect()
 migrate = Migrate()
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder="static", template_folder="templates")
     # --- security & session config ---
     app.config.update(
         SECRET_KEY="replace-me",  # set via env in prod
