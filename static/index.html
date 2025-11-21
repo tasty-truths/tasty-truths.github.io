@@ -17,9 +17,9 @@
     <link
       rel="icon"
       type="image/png"
-      href="/assets/favicon/favicon-96x96.png"
-      sizes="96x96"
+      href="{{ url_for('static', filename='assets/favicon/favicon-96x96.png') }}"
     />
+
     <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg" />
     <link rel="shortcut icon" href="/assets/favicon/favicon.ico" />
     <link
@@ -28,7 +28,10 @@
       href="/assets/favicon/apple-touch-icon.png"
     />
     <link rel="manifest" href="/assets/favicon/site.webmanifest" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
   </head>
   <body>
     <!-- header that can be used for all pages with small tweaks to links-->
@@ -36,7 +39,9 @@
       <div class="header-container container">
         <div class="logo">
           <a href="../index.html">
-            <img src="../assets/images/logo_main.png" alt="Tasty Truths logo" />
+            <img
+              src="{{ url_for('static', filename='assets/images/logo_main.png') }}"
+            />
           </a>
         </div>
 
