@@ -1,14 +1,13 @@
 # app.py
 from datetime import timedelta
-from flask import Flask, request, jsonify, redirect, url_for
+from flask import Flask, request, jsonify, redirect, url_for, redirect
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user, UserMixin
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from argon2 import PasswordHasher
 
 from services.db import db
-from services.models import Recipe, RecipeSlugHistory, User  # <-- add User
-# If your User class isn't UserMixin, we wrap it below
+from services.models import Recipe, RecipeSlugHistory, User
 
 ph = PasswordHasher()
 login_manager = LoginManager()
@@ -34,6 +33,38 @@ def create_app():
     Migrate(app, db)
     csrf.init_app(app)
     login_manager.init_app(app)
+
+    @app.route("/")
+    def root():
+        # send /static/index.html
+        return app.send_static_file("index.html")
+    
+    # --- API endpoints, not pages ---
+
+    @app.route("/api/auth/me")
+    def who_am_i():
+        # return login state (based on session / Flask-Login)
+        ...
+
+    @app.route("/api/auth/login", methods=["POST"])
+    def login_api():
+        ...
+
+    @app.route("/api/auth/logout", methods=["POST"])
+    def logout_api():
+        ...
+
+    @app.route("/api/auth/signup", methods=["POST"])
+    def signup_api():
+        ...
+
+    @app.route("/api/recipes")
+    def list_recipes():
+        ...
+
+    @app.route("/api/blog")
+    def list_blog_posts():
+        ...
 
     # ---- login manager user loader ----
     @login_manager.user_loader
@@ -151,6 +182,9 @@ def create_app():
     return app
 
 app = create_app()
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
