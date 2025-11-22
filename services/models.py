@@ -1,9 +1,12 @@
 # services/models.py
 from datetime import datetime
+from argon2 import PasswordHasher
 from sqlalchemy import event
 from flask_login import UserMixin
 from services.db import db
 from utilities.slug import base_slug, uniquify_slug
+
+ph = PasswordHasher()
 
 class Recipe(db.Model):
     __tablename__ = "recipes"
@@ -48,6 +51,17 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(80), unique=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def set_password(self, raw_password, hasher=ph):
+        """Hash and store the password."""
+        self.password_hash = hasher.hash(raw_password)
+
+    def check_password(self, raw_password, hasher=ph):
+        """Verify a password."""
+        try:
+            return hasher.verify(self.password_hash, raw_password)
+        except Exception:
+            return False
 
     def __repr__(self):
         return f"<User {self.username}>"

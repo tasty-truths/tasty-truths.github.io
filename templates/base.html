@@ -2,9 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Tasty Truths</title>
+    <title>{% block title %}Tasty Truths{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Short page description." />
+
+    <!-- Icons -->
     <script
       type="module"
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
@@ -17,47 +18,49 @@
     <link
       rel="icon"
       type="image/png"
-      href="/assets/favicon/favicon-96x96.png"
-      sizes="96x96"
+      href="{{ url_for('static', filename='assets/favicon/favicon-96x96.png') }}"
     />
-    <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg" />
-    <link rel="shortcut icon" href="/assets/favicon/favicon.ico" />
     <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/assets/favicon/apple-touch-icon.png"
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
     />
-    <link rel="manifest" href="/assets/favicon/site.webmanifest" />
-    <link rel="stylesheet" href="/css/styles.css" />
   </head>
+
   <body>
-    <!-- header that can be used for all pages with small tweaks to links-->
+    <!-- HEADER (shared across all pages) -->
     <header class="site-header">
       <div class="header-container container">
         <div class="logo">
-          <a href="../index.html">
-            <img src="../assets/images/logo_main.png" alt="Tasty Truths" />
+          <a href="{{ url_for('index') }}">
+            <img
+              src="{{ url_for('static', filename='assets/images/logo_main.png') }}"
+            />
           </a>
         </div>
 
-        <nav class="main-nav" aria-label="Primary">
-          <a href="about_us.html">About</a>
-          <a class="button" href="recipes.html">Recipes</a>
-          <a href="blog.html">Blog</a>
-          <a href="contact.html">Contact</a>
+        <nav class="main-nav">
+          <a href="{{ url_for('about_us') }}">About</a>
+          <a href="{{ url_for('recipes') }}">Recipes</a>
+          <a href="{{ url_for('blog') }}">Blog</a>
+          <a href="{{ url_for('contact') }}">Contact</a>
         </nav>
 
         <div class="auth-links">
-          <a href="login.html" class="button">Login</a>
-          <a href="signup.html" class="button signup">Sign Up</a>
+          {% if current_user.is_authenticated %}
+          <span>Logged in as {{ current_user.username }}</span>
+          <a href="{{ url_for('logout') }}" class="button">Logout</a>
+          {% else %}
+          <a href="{{ url_for('login') }}" class="button">Login</a>
+          <a href="{{ url_for('signup') }}" class="button signup">Sign Up</a>
+          {% endif %}
         </div>
       </div>
     </header>
 
-    <main>
-      <p>Recipe main page goes here.</p>
-    </main>
+    <!-- PAGE CONTENT -->
+    <main>{% block content %}{% endblock %}</main>
 
+    <!-- FOOTER -->
     <footer class="footer">
       <small>&copy; 2025</small>
       <a href="mailto:tastytruths@gmail.com"
@@ -75,6 +78,6 @@
       ></a>
     </footer>
 
-    <script src="path/to/script.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
   </body>
 </html>

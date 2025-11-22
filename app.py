@@ -1,6 +1,6 @@
 # app.py
 from datetime import timedelta
-from flask import Flask, request, jsonify, redirect, url_for, redirect
+from flask import Flask, request, jsonify, redirect, url_for, redirect, render_template
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user, UserMixin
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
@@ -33,39 +33,61 @@ def create_app():
     Migrate(app, db)
     csrf.init_app(app)
     login_manager.init_app(app)
-
-    @app.route("/")
-    def root():
-        # send /static/index.html
-        return app.send_static_file("index.html")
     
-    # --- API endpoints, not pages ---
-    """
-    @app.route("/api/auth/me")
-    def who_am_i():
-        # return login state (based on session / Flask-Login)
-        ...
+    @app.route("/")
+    def index():
+        return render_template("index.html")
+    
+    @app.route("/about")
+    def about_us():
+        return render_template("about_us.html")
 
-    @app.route("/api/auth/login", methods=["POST"])
-    def login_api():
-        ...
+    @app.route("/recipes")
+    def recipes():
+        return render_template("recipes.html")
 
-    @app.route("/api/auth/logout", methods=["POST"])
-    def logout_api():
-        ...
+    @app.route("/blog")
+    def blog():
+        return render_template("blog.html")
 
-    @app.route("/api/auth/signup", methods=["POST"])
-    def signup_api():
-        ...
+    @app.route("/contact")
+    def contact():
+        return render_template("contact.html")
 
-    @app.route("/api/recipes")
-    def list_recipes():
-        ...
+    @app.route("/login")
+    def login():
+        return render_template("login.html")
 
-    @app.route("/api/blog")
-    def list_blog_posts():
-        ...
-    """
+    @csrf.exempt
+    @app.route("/signup", methods=["GET", "POST"])
+    def signup():
+        if request.method == "POST":
+            username = (request.form.get("username") or "").strip()
+            password = request.form.get("password") or ""
+            confirm  = request.form.get("confirmPassword") or ""
+
+            # Basic validation
+            if not username or not password:
+                return "Missing username or password", 400
+
+            if password != confirm:
+                return "Passwords do not match", 400
+
+            # Check if username already exists
+            if User.query.filter_by(username=username).first():
+                return "Username already taken", 409
+
+            # Create the user
+            u = User(username=username)
+            u.set_password(password, ph)  # your existing helper
+            db.session.add(u)
+            db.session.commit()
+
+            return redirect(url_for("login"))
+
+        return render_template("signup.html")
+
+    
     # ---- login manager user loader ----
     @login_manager.user_loader
     def load_user(user_id: str):
@@ -87,15 +109,16 @@ def create_app():
     @app.post("/api/auth/register")
     def register():
         data = _json()
-        email = (data.get("email") or "").strip().lower()
+        username = (data.get("username") or "").strip()
         password = data.get("password") or ""
-        if not email or not password:
-            return jsonify({"error": "email and password required"}), 400
 
-        if User.query.filter_by(email=email).first():
-            return jsonify({"error": "email already registered"}), 409
+        if not username or not password:
+            return jsonify({"error": "username and password required"}), 400
 
-        u = User(email=email)
+        if User.query.filter_by(username=username).first():
+            return jsonify({"error": "username already registered"}), 409
+
+        u = User(username=username)
         u.set_password(password, ph)  # argon2
         db.session.add(u)
         db.session.commit()
@@ -103,34 +126,24 @@ def create_app():
 
     @csrf.exempt
     @app.post("/api/auth/login")
-    def login():
+    def api_login():
         data = _json()
-        email = (data.get("email") or "").strip().lower()
+        username = (data.get("username") or "").strip()
         password = data.get("password") or ""
 
-        user = User.query.filter_by(email=email).first()
-        if not user:
+        user = User.query.filter_by(username=username).first()
+        if not user or not user.check_password(password, ph):
             return jsonify({"error": "invalid credentials"}), 401
 
-        if not user.check_password(password, ph):
-            return jsonify({"error": "invalid credentials"}), 401
-
-        # Rotates session; use remember=False for pure server session
         login_user(user, remember=False, duration=timedelta(hours=8))
         return jsonify({"ok": True})
-    
-    @csrf.exempt
-    @app.post("/api/auth/logout")
-    @login_required
-    def logout():
-        logout_user()
-        return jsonify({"ok": True})
+
 
     @app.get("/api/auth/me")
     def me():
         if current_user.is_authenticated:
-            return jsonify({"id": current_user.id, "email": current_user.email})
-        return jsonify({"id": None, "email": None})
+            return jsonify({"id": current_user.id, "username": current_user.username})
+        return jsonify({"id": None, "username": None})
 
     # ---- RECIPES (unchanged behavior, plus auth on create) ----
 
@@ -182,9 +195,6 @@ def create_app():
     return app
 
 app = create_app()
-
-
-
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0")
