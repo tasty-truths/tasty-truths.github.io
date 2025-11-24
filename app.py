@@ -1,11 +1,11 @@
 # app.py
 from datetime import timedelta
-from flask import Flask, request, jsonify, redirect, url_for, redirect, render_template
+from flask import Flask, request, jsonify, redirect, url_for, redirect, render_template, flash
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user, UserMixin
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from argon2 import PasswordHasher
-
+from sqlalchemy.exc import SQLAlchemyError
 from services.db import db
 from services.models import Recipe, RecipeSlugHistory, User
 
@@ -34,6 +34,12 @@ def create_app():
     csrf.init_app(app)
     login_manager.init_app(app)
     
+    @app.route("/logout")
+    @login_required
+    def logout():
+        logout_user()
+        return redirect(url_for("index"))
+    
     @app.route("/")
     def index():
         return render_template("index.html")
@@ -54,36 +60,70 @@ def create_app():
     def contact():
         return render_template("contact.html")
 
-    @app.route("/login")
-    def login():
-        return render_template("login.html")
-
     @csrf.exempt
     @app.route("/signup", methods=["GET", "POST"])
     def signup():
         if request.method == "POST":
-            username = (request.form.get("username") or "").strip()
-            password = request.form.get("password") or ""
-            confirm  = request.form.get("confirmPassword") or ""
+            try:
+                username = (request.form.get("username") or "").strip()
+                password = request.form.get("password") or ""
+                confirm  = request.form.get("confirmPassword") or ""
+                email = (request.form.get("email") or "").strip()
+                first_name = (request.form.get("firstName") or "").strip()
+                last_name = (request.form.get("lastName") or "").strip()
+                dob = request.form.get("dob") or None
+                gender = request.form.get("gender") or None
 
-            # Basic validation
-            if not username or not password:
-                return "Missing username or password", 400
+                # Basic validation
+                if not username or not password:
+                    flash("Missing username or password", "error")
+                    return render_template("signup.html"), 400
 
-            if password != confirm:
-                return "Passwords do not match", 400
+                if password != confirm:
+                    flash("Passwords do not match", "error")
+                    return render_template("signup.html"), 400
 
-            # Check if username already exists
-            if User.query.filter_by(username=username).first():
-                return "Username already taken", 409
+                # Check if username already exists
+                if User.query.filter_by(username=username).first():
+                    flash("Username already taken", "error")
+                    return render_template("signup.html"), 409
+                    
+                # Check if email already exists
+                if email and User.query.filter_by(email=email).first():
+                    flash("Email already registered", "error")
+                    return render_template("signup.html"), 409
 
-            # Create the user
-            u = User(username=username)
-            u.set_password(password, ph)  # your existing helper
-            db.session.add(u)
-            db.session.commit()
-
-            return redirect(url_for("login"))
+                # Create the user with all fields
+                u = User(
+                    username=username,
+                    email=email or None,
+                    first_name=first_name or None,
+                    last_name=last_name or None,
+                    gender=gender or None
+                )
+                
+                # Handle date of birth
+                if dob:
+                    from datetime import datetime as dt
+                    try:
+                        u.date_of_birth = dt.strptime(dob, "%Y-%m-%d").date()
+                    except ValueError:
+                        pass
+                
+                u.set_password(password, ph)
+                db.session.add(u)
+                db.session.commit()
+                
+                flash("Account created successfully! Please log in.", "success")
+                return redirect(url_for("login"))
+            
+            except Exception as e:
+                db.session.rollback()
+                print(f"ERROR during signup: {e}")
+                import traceback
+                traceback.print_exc()
+                flash("An error occurred during signup. Please try again.", "error")
+                return render_template("signup.html"), 500
 
         return render_template("signup.html")
 
@@ -137,7 +177,29 @@ def create_app():
 
         login_user(user, remember=False, duration=timedelta(hours=8))
         return jsonify({"ok": True})
+    
+    @csrf.exempt
+    @app.route("/login", methods=["GET", "POST"])
+    def login():
+        # Already logged in? send them home
+        if current_user.is_authenticated:
+            return redirect(url_for("index"))
 
+        if request.method == "POST":
+            username = (request.form.get("username") or "").strip()
+            password = request.form.get("password") or ""
+
+            user = User.query.filter_by(username=username).first()
+            # NOTE: pass ph here, same as api_login
+            if not user or not user.check_password(password, ph):
+                flash("Invalid username or password", "error")
+                return render_template("login.html"), 401
+
+            login_user(user, remember=False, duration=timedelta(hours=8))
+            return redirect(url_for("index"))
+
+        # GET: just show the form
+        return render_template("login.html")
 
     @app.get("/api/auth/me")
     def me():
@@ -152,11 +214,25 @@ def create_app():
     @app.post("/api/recipes")
     @login_required
     def create_recipe():
-        data = _json()
-        r = Recipe(title=(data.get("title") or "").strip(),
-                   content=data.get("content") or "")
+        # Try to parse JSON safely
+        data = request.get_json(silent=True) or {}
+        title = (data.get("title") or "").strip()
+        content = data.get("content") or ""
+
+        if not title:
+            return jsonify({"error": "title is required"}), 400
+
+        r = Recipe(title=title, content=content)
         db.session.add(r)
-        db.session.commit()
+
+        try:
+            db.session.commit()
+        except SQLAlchemyError as e:
+            db.session.rollback()
+            # TEMP: print error so you see it in the Flask console
+            print("ERROR saving recipe:", e)
+            return jsonify({"error": "server error saving recipe", "detail": str(e)}), 500
+
         return jsonify({"id": r.id, "slug": r.slug, "title": r.title}), 201
 
     # Canonical detail URL: /recipes/<id>-<slug>
@@ -189,6 +265,17 @@ def create_app():
         rows = Recipe.query.order_by(Recipe.created_at.desc()).all()
         return jsonify([{"id": r.id, "title": r.title, "slug": r.slug} for r in rows])
 
+    @app.get("/api/whoami")
+    def whoami():
+        if current_user.is_authenticated:
+            return {
+                "authenticated": True,
+                "id": current_user.id,
+                "username": current_user.username,
+            }
+        else:
+            return {"authenticated": False}, 200
+    
     with app.app_context():
         db.create_all()
 

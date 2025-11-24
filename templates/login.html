@@ -4,7 +4,7 @@
 {% block content %}
 
     <div class="login-form">
-      <form action="/login" method="post">
+      <form action="{{ url_for('login') }}" method="post">
         <h2>Login</h2>
 
         <label for="username">Username:</label><br />
@@ -25,11 +25,11 @@
         /><br /><br />
 
         <button type="submit">Login</button>
-        <button type="button" onclick="window.location.href='../index.html'">
+        <button type="button" onclick=window.location.href="{{ url_for('index') }}">
           Cancel
         </button>
 
-        <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+        <p>Don't have an account? <a href="{{ url_for('signup') }}">Sign up</a></p>
       </form>
     </div>
 

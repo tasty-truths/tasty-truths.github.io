@@ -16,6 +16,7 @@ class Recipe(db.Model):
     content = db.Column(db.Text, default="")
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
+    author_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=True)
 
 class RecipeSlugHistory(db.Model):
     __tablename__ = "recipe_slug_history"
@@ -47,9 +48,15 @@ def recipe_before_update(mapper, connection, target: Recipe):
             session.add(RecipeSlugHistory(recipe_id=target.id, old_slug=old_slug))
 
 class User(db.Model, UserMixin):
+    __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=True)
+    first_name = db.Column(db.String(100), nullable=True)
+    last_name = db.Column(db.String(100), nullable=True)
+    date_of_birth = db.Column(db.Date, nullable=True)
+    gender = db.Column(db.String(20), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     def set_password(self, raw_password, hasher=ph):

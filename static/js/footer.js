@@ -4,17 +4,17 @@ function renderFooter() {
       <div class="footerbox">
         <div class="fbox" id="fbox1">
           <a href="/index.html">
-            <img src="/assets/images/logo_main.png" alt="Tasty Truths logo" />
+            <img src="/assets/images/logo_main.webp" alt="Tasty Truths logo" />
           </a>
         </div>
 
         <div class="fbox" id="fbox2">
           <p class="hover-menu">Pages ↑</p>
           <div class="popup">
-            <a href="/static/index.html">Home</a>
-            <a href="/static/pages/recipes.html">Recipes</a>
-            <a href="/static/pages/contact.html">Contact</a>
-            <a href="/static/pages/blog.html">Blog</a>
+            <a href="/index">Home</a>
+            <a href="/recipes">Recipes</a>
+            <a href="/contact">Contact</a>
+            <a href="/blog">Blog</a>
           </div>
         </div>
 
