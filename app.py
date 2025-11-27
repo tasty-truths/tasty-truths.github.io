@@ -50,7 +50,9 @@ def create_app():
 
     @app.route("/recipes")
     def recipes():
-        return render_template("recipes.html")
+        # Fetch featured recipes (first 3 or random)
+        featured_recipes = Recipe.query.order_by(Recipe.created_at.desc()).limit(3).all()
+        return render_template("recipes.html", featured_recipes=featured_recipes)
 
     @app.route("/blog")
     def blog():
@@ -59,6 +61,12 @@ def create_app():
     @app.route("/contact")
     def contact():
         return render_template("contact.html")
+    
+    @app.route("/recipes/create")
+    @login_required
+    def create_recipe_page():
+        """Display the recipe creation form (requires login)"""
+        return render_template("create_recipe.html")
 
     @csrf.exempt
     @app.route("/signup", methods=["GET", "POST"])

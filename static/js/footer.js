@@ -9,9 +9,9 @@ function renderFooter() {
         </div>
 
         <div class="fbox" id="fbox2">
-          <p class="hover-menu">Pages ↑</p>
+          <p class="hover-menu" tabindex="0">Pages ↑</p>
           <div class="popup">
-            <a href="/index">Home</a>
+            <a href="/">Home</a>
             <a href="/recipes">Recipes</a>
             <a href="/contact">Contact</a>
             <a href="/blog">Blog</a>
@@ -25,11 +25,11 @@ function renderFooter() {
         </div>
 
         <div class="fbox" id="fbox4">
-          <a href="/static/pages/about_us.html">About Us</a>
+          <a href="/about">About Us</a>
         </div>
 
         <div class="fbox" id="fbox5">
-          <a href="/static/pages/contact.html">Contact</a>
+          <a href="/contact">Contact</a>
         </div>
 
         <div class="fbox" id="fbox6">

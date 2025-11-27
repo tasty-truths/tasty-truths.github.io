@@ -1,7 +1,7 @@
 # services/models.py
 from datetime import datetime
 from argon2 import PasswordHasher
-from sqlalchemy import event
+from sqlalchemy import event, JSON
 from flask_login import UserMixin
 from services.db import db
 from utilities.slug import base_slug, uniquify_slug
@@ -14,6 +14,19 @@ class Recipe(db.Model):
     title = db.Column(db.String(200), nullable=False)
     slug = db.Column(db.String(90), unique=True, index=True, nullable=False)
     content = db.Column(db.Text, default="")
+    description = db.Column(db.String(500), default="")
+    
+    # Timing
+    prep_time_minutes = db.Column(db.Integer, nullable=True)
+    cook_time_minutes = db.Column(db.Integer, nullable=True)
+    total_time_minutes = db.Column(db.Integer, nullable=True)
+    
+    # Metadata
+    cuisine = db.Column(db.String(100), default="")
+    dietary_tags = db.Column(JSON, default=list)
+    image_filename = db.Column(db.String(255), default="images/placeholder_recipe.png")
+    average_rating = db.Column(db.Float, nullable=True)
+    
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
     author_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=True)
