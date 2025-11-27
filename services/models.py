@@ -16,15 +16,20 @@ class Recipe(db.Model):
     content = db.Column(db.Text, default="")
     description = db.Column(db.String(500), default="")
     
-    # Timing
+    # New recipe fields
+    instructions = db.Column(db.Text, nullable=True)
+    ingredients = db.Column(db.Text, nullable=True)  # newline-separated or JSON list
+    image_filename = db.Column(db.String(255), nullable=True)
+    
+    # Timing (in minutes)
     prep_time_minutes = db.Column(db.Integer, nullable=True)
     cook_time_minutes = db.Column(db.Integer, nullable=True)
     total_time_minutes = db.Column(db.Integer, nullable=True)
     
     # Metadata
+    estimated_cost = db.Column(db.String(50), nullable=True)
     cuisine = db.Column(db.String(100), default="")
     dietary_tags = db.Column(JSON, default=list)
-    image_filename = db.Column(db.String(255), default="images/placeholder_recipe.png")
     average_rating = db.Column(db.Float, nullable=True)
     
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)

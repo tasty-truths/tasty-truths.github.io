@@ -1,7 +1,7 @@
 """Add recipe metadata columns
 
 Revision ID: c81e87f5546b
-Revises: 
+Revises: initial_recipes
 Create Date: 2025-11-26 11:55:49.619167
 
 """
@@ -11,7 +11,7 @@ import sqlalchemy as sa
 
 # revision identifiers, used by Alembic.
 revision = 'c81e87f5546b'
-down_revision = None
+down_revision = 'initial_recipes'
 branch_labels = None
 depends_on = None
 

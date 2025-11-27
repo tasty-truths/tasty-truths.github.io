@@ -6,8 +6,11 @@ from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from argon2 import PasswordHasher
 from sqlalchemy.exc import SQLAlchemyError
+from werkzeug.utils import secure_filename
+import os
 from services.db import db
 from services.models import Recipe, RecipeSlugHistory, User
+from services.forms import RecipeForm
 
 ph = PasswordHasher()
 login_manager = LoginManager()
@@ -26,6 +29,7 @@ def create_app():
         SESSION_COOKIE_SAMESITE="Lax",
         PERMANENT_SESSION_LIFETIME=timedelta(hours=8),
         WTF_CSRF_TIME_LIMIT=None,        # CSRF token lifetime (optional)
+        MAX_CONTENT_LENGTH=2 * 1024 * 1024,  # 2MB file upload limit
     )
 
     # --- init extensions in the right order ---
@@ -62,11 +66,61 @@ def create_app():
     def contact():
         return render_template("contact.html")
     
-    @app.route("/recipes/create")
+    @app.route("/recipes/create", methods=["GET", "POST"])
     @login_required
     def create_recipe_page():
-        """Display the recipe creation form (requires login)"""
-        return render_template("create_recipe.html")
+        """Display and handle the recipe creation form (requires login)"""
+        form = RecipeForm()
+        
+        if form.validate_on_submit():
+            # Handle image upload if provided
+            image_filename = None
+            if form.image.data:
+                file = form.image.data
+                filename = secure_filename(file.filename)
+                # Add timestamp to filename to ensure uniqueness
+                import uuid
+                filename = f"{uuid.uuid4().hex}_{filename}"
+                
+                # Create uploads directory if it doesn't exist
+                upload_dir = os.path.join(app.static_folder, "uploads", "recipes")
+                os.makedirs(upload_dir, exist_ok=True)
+                
+                file.save(os.path.join(upload_dir, filename))
+                image_filename = f"uploads/recipes/{filename}"
+            
+            # Normalize ingredients: split by newline, strip whitespace, filter empty lines
+            ingredients_text = form.ingredients.data or ""
+            ingredients_list = [
+                line.strip() 
+                for line in ingredients_text.split("\n") 
+                if line.strip()
+            ]
+            ingredients_normalized = "\n".join(ingredients_list)
+            
+            # Create recipe
+            recipe = Recipe(
+                title=form.title.data,
+                instructions=form.instructions.data,
+                ingredients=ingredients_normalized,
+                image_filename=image_filename,
+                prep_time_minutes=form.prep_time_minutes.data,
+                cook_time_minutes=form.cook_time_minutes.data,
+                estimated_cost=form.estimated_cost.data,
+                author_id=current_user.id if current_user.is_authenticated else None,
+            )
+            
+            try:
+                db.session.add(recipe)
+                db.session.commit()
+                flash("Recipe created successfully!", "success")
+                return redirect(url_for("recipe_detail", id_slug=f"{recipe.id}-{recipe.slug}"))
+            except SQLAlchemyError as e:
+                db.session.rollback()
+                print(f"ERROR saving recipe: {e}")
+                flash("An error occurred while saving the recipe. Please try again.", "error")
+        
+        return render_template("create_recipe.html", form=form)
 
     @csrf.exempt
     @app.route("/signup", methods=["GET", "POST"])
@@ -88,12 +142,12 @@ def create_app():
                     return render_template("signup.html"), 400
 
                 if password != confirm:
-                    flash("Passwords do not match", "error")
+                    flash("Passwords do not match.", "error")
                     return render_template("signup.html"), 400
 
                 # Check if username already exists
                 if User.query.filter_by(username=username).first():
-                    flash("Username already taken", "error")
+                    flash("That username is already taken. Please choose another.", "error")
                     return render_template("signup.html"), 409
                     
                 # Check if email already exists
@@ -200,7 +254,7 @@ def create_app():
             user = User.query.filter_by(username=username).first()
             # NOTE: pass ph here, same as api_login
             if not user or not user.check_password(password, ph):
-                flash("Invalid username or password", "error")
+                flash("Incorrect username or password. Please try again.", "error")
                 return render_template("login.html"), 401
 
             login_user(user, remember=False, duration=timedelta(hours=8))
@@ -250,7 +304,8 @@ def create_app():
             rid_str, _, tail = id_slug.partition("-")
             rid = int(rid_str)
         except Exception:
-            return jsonify({"error": "Bad id"}), 400
+            flash("Recipe not found.", "error")
+            return redirect(url_for("recipes"))
 
         r = db.session.get(Recipe, rid)
         if not r:
@@ -259,13 +314,19 @@ def create_app():
             if old:
                 canonical = f"{old.recipe_id}-{db.session.get(Recipe, old.recipe_id).slug}"
                 return redirect(url_for("recipe_detail", id_slug=canonical), code=301)
-            return jsonify({"error": "Not found"}), 404
+            flash("Recipe not found.", "error")
+            return redirect(url_for("recipes"))
 
         canonical = f"{r.id}-{r.slug}"
         if id_slug != canonical:
             return redirect(url_for("recipe_detail", id_slug=canonical), code=301)
 
-        return jsonify({"id": r.id, "title": r.title, "slug": r.slug, "content": r.content})
+        # Parse ingredients if stored as newline-separated text
+        ingredients_list = []
+        if r.ingredients:
+            ingredients_list = [line.strip() for line in r.ingredients.split("\n") if line.strip()]
+
+        return render_template("recipe_detail.html", recipe=r, ingredients=ingredients_list)
 
     # Simple list
     @app.get("/api/recipes")
@@ -283,6 +344,10 @@ def create_app():
             }
         else:
             return {"authenticated": False}, 200
+    
+    @app.errorhandler(404)
+    def not_found(error):
+        return render_template("404.html"), 404
     
     with app.app_context():
         db.create_all()

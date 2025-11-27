@@ -5,6 +5,14 @@ block content %}
   <form action="/signup" method="POST">
     <h2>Create An Account!</h2>
 
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
     <label for="firstName">First Name</label><br />
     <input type="text" id="firstName" name="firstName" required /><br />
 
@@ -49,7 +57,7 @@ block content %}
     /><br />
 
     <label for="dob">Date of Birth</label><br />
-    <input type="date" id="dob" name="dob" required /><br />
+    <input type="date" id="dob" name="dob" min="2010-01-01" value="2010-01-01" required /><br />
 
     <label for="gender">Gender</label><br />
     <select id="gender" name="gender" required>
@@ -74,5 +82,24 @@ block content %}
     <p>Already have an account? <a href="{{ url_for('login') }}">Log in</a></p>
   </form>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('.signup-form form');
+    const passwordField = document.getElementById('password');
+    const confirmPasswordField = document.getElementById('confirmPassword');
+    const alerts = document.querySelectorAll('.alert');
+
+    // If there are any alerts and password mismatch is detected, clear only password fields
+    if (alerts.length > 0) {
+      alerts.forEach(alert => {
+        if (alert.textContent.includes('Passwords do not match')) {
+          passwordField.value = '';
+          confirmPasswordField.value = '';
+        }
+      });
+    }
+  });
+</script>
 
 {% endblock %}
