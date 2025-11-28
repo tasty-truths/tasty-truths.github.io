@@ -209,7 +209,7 @@ def create_app():
     # ---- auth: register/login/logout/me ----
     @csrf.exempt
     @app.post("/api/auth/register")
-    def register():git 
+    def register():
         data = _json()
         username = (data.get("username") or "").strip()
         password = data.get("password") or ""
