@@ -209,7 +209,7 @@ def create_app():
     # ---- auth: register/login/logout/me ----
     @csrf.exempt
     @app.post("/api/auth/register")
-    def register():
+    def register():git 
         data = _json()
         username = (data.get("username") or "").strip()
         password = data.get("password") or ""
@@ -221,7 +221,7 @@ def create_app():
             return jsonify({"error": "username already registered"}), 409
 
         u = User(username=username)
-        u.set_password(password, ph)  # argon2
+        u.set_password(password, ph)
         db.session.add(u)
         db.session.commit()
         return jsonify({"ok": True})
